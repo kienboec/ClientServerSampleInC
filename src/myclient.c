@@ -126,6 +126,16 @@ int main(int argc, char **argv)
 
          //////////////////////////////////////////////////////////////////////
          // RECEIVE FEEDBACK
+         // consider: reconnect handling might be appropriate in somes cases
+         //           How can we determine that the command sent was received 
+         //           or not? 
+         //           - Resend, might change state too often. 
+         //           - Else a command might have been lost.
+         //
+         // solution 1: adding meta-data (unique command id) and check on the
+         //             server if already processed.
+         // solution 2: add an infrastructure component for messaging (broker)
+         //
          size = recv(create_socket, buffer, BUF - 1, 0);
          if (size == -1)
          {
